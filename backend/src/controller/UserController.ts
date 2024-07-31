@@ -1,19 +1,30 @@
+import { Request, Response } from 'express';
 import { User } from "../models/User";
 import { hash } from "bcrypt";
 
 
 export default class UserController {
 
-    static async getAllUsers(req: any, res: any) {
+    static async getAllUsers(req: Request, res: Response): Promise<void> {
         try {
             const users = await User.findAll();
-            return res.json(users);
+            res.json(users);
         } catch (error) {
-            res.send('Erro ao buscar usuários ', error);
+            res.send('Erro ao buscar usuários '+ error);
         }
     }
 
-    static async createUser(req: any, res: any) {
+    static async getUserById(req: Request, res: Response): Promise<void> {
+        const { id } = req.params;
+        try {
+            const user = await User.findOne({ where: { id } });
+            res.json(user);
+        } catch (error) {
+            res.send('Erro ao buscar usuário '+ error);
+        }
+    }
+
+    static async createUser(req: any, res: any): Promise<void> {
         const { name, email, password } = req.body;
         try {
 
@@ -36,7 +47,7 @@ export default class UserController {
         }
     }
 
-    static async updateUser(req: any, res: any) {
+    static async updateUser(req: any, res: any): Promise<void> {
         const { id } = req.params;
         const user = req.body;
         try {
@@ -47,7 +58,7 @@ export default class UserController {
         }
     }
 
-    static async deleteUser(req: any, res: any) {
+    static async deleteUser(req: any, res: any): Promise<void> {
         const { id } = req.params;
         try {
             const user = await User.destroy({ where: { id } });
