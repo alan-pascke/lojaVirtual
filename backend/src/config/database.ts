@@ -1,5 +1,14 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
+import { User } from '../models/User';
+import { Address } from '../models/Address';
+import { Category } from '../models/Category';
+import { Product } from '../models/Product';
+import { Order } from '../models/Order';
+import { Payment } from '../models/Payment';
+import { ShoppingCart } from '../models/ShoppingCart';
+import { OrderProduct } from '../models/OrderProduct';
+import { ShoppingCartProduct } from '../models/ShoppingCartProduct';
 dotenv.config();
 
 
@@ -11,13 +20,7 @@ if (!dbUrl) {
   }
 const sequelize = new Sequelize(dbUrl, {
     dialect: 'postgres',
-    protocol: 'postgres',
-    dialectOptions: {
-        ssl: {
-        require: true,
-        rejectUnauthorized: false // Você pode ajustar conforme necessário
-        }
-    }
+    models: [User, Address, Category, Product, Order, Payment, ShoppingCart, OrderProduct, ShoppingCartProduct],
   });
 
 sequelize.authenticate().then(() => {

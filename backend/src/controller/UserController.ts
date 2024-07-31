@@ -1,4 +1,4 @@
-import User from "../models/User";
+import { User } from "../models/User";
 import { hash } from "bcrypt";
 
 
@@ -21,19 +21,18 @@ export default class UserController {
             if (checkUserExists) {
                 return res.status(400).json({ error: 'Usuário ja existe' });
             } else {
-                const hashedPassword = hash(password, 10);
+                const hashedPassword = await hash(password, 10);
 
-                const newUser = await User.create({
+                await User.create({
                     name,
                     email,
                     password: hashedPassword
-                })                
+                })
+                
+                res.status(200).json({ message: 'Usuário criado com sucesso!' });
             }
-
-            const user = await User.create(req.body);
-            return res.json(user);
         } catch (error) {
-            res.send('Erro ao criar usuário ', error);
+            res.status(400).json({ error: 'Erro ao criar usuário '+ error });
         }
     }
 
@@ -45,6 +44,16 @@ export default class UserController {
             return res.json(user);
         } catch (error) {
             res.send('Erro ao atualizar usuário ', error);
+        }
+    }
+
+    static async deleteUser(req: any, res: any) {
+        const { id } = req.params;
+        try {
+            const user = await User.destroy({ where: { id } });
+            return res.status(200).json({ message: 'Usuário deletado com sucesso!' });
+        } catch (error) {
+            res.status(400).json({ error: 'Erro ao deletar usuário '+ error });
         }
     }
 }

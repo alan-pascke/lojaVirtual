@@ -1,40 +1,26 @@
-import { DataTypes, Model } from "sequelize";
-import sequelize from "../config/database";
+import { Table, Column, Model, HasMany, HasOne } from 'sequelize-typescript';
+import { Address } from './Address';
+import { Order } from './Order';
+import { ShoppingCart }  from './ShoppingCart';
+import { DataTypes } from 'sequelize';
 
-enum Role {
-    ADMIN = "admin",
-    CLIENT = "client"
+@Table 
+export class User extends Model {
+    @Column({type: DataTypes.STRING})
+    name!: string;
+
+    @Column({type: DataTypes.STRING, unique: true, validate:{isEmail: true}})
+    email!: string;
+
+    @Column({type: DataTypes.STRING})
+    password!: string;
+
+    @HasMany(() => Address)
+    addresses!: Address[];
+
+    @HasMany(() => Order)
+    orders!: Order[];
+
+    @HasOne(() => ShoppingCart)
+    shoppingCart!: ShoppingCart;
 }
-
-
-class User extends Model {}
-
-User.init(
-    {
-        name: {
-            type: DataTypes.STRING(60),
-            allowNull: false
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            validate:{
-                isEmail: true
-            }
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        role: {
-            type: DataTypes.ENUM(Role.ADMIN, Role.CLIENT),
-            allowNull: false
-        }
-    },{ 
-        sequelize, 
-        tableName: "users" 
-    }
-)
-
-export default User
