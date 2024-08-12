@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import { Category } from '../models/Category';
 
 
-export class CategoryController {
+export default class CategoryController {
 
-    async getAllCategories(req: Request, res: Response): Promise<void> {
+    static async getAllCategories(req: Request, res: Response): Promise<void> {
         try {
             const categories = await Category.findAll();
             res.json(categories);
@@ -13,7 +13,7 @@ export class CategoryController {
         }
     }
 
-    async getCategoryById(req: Request, res: Response): Promise<void> {
+    static async getCategoryById(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const category = await Category.findOne({ where: { id } });
@@ -23,9 +23,11 @@ export class CategoryController {
         }
     }
 
-    async createCategory(req: Request, res: Response): Promise<void> {  
+    static async createCategory(req: Request, res: Response){  
+        const { name } = req.body;
+        
+    
         try {
-            const { name } = req.body;
             const category = await Category.create({ name });
             res.status(201).json(category);
         } catch (error) {
@@ -33,7 +35,7 @@ export class CategoryController {
         }   
     }
 
-    async updateCategory(req: Request, res: Response): Promise<void> {
+    static async updateCategory(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const { name } = req.body;
@@ -44,7 +46,7 @@ export class CategoryController {
         }
     }
 
-    async deleteCategory(req: Request, res: Response): Promise<void> {
+    static async deleteCategory(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const category = await Category.destroy({ where: { id } });

@@ -3,7 +3,9 @@ import { Table, Column, Model, ForeignKey } from 'sequelize-typescript';
 import { ShoppingCart } from './ShoppingCart';
 import { Product } from './Product';
 
-@Table
+@Table({
+    tableName: 'shopping_cart_products',
+})
 export class ShoppingCartProduct extends Model {
     @ForeignKey(() => ShoppingCart)
     @Column

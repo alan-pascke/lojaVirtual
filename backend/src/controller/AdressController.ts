@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { Address } from '../models/Address';
 
-export class AddressController {
-    async getAllAddresses(req: Request, res: Response): Promise<void> {
+export default class AddressController {
+    static async getAllAddresses(req: Request, res: Response): Promise<void> {
         try {
             const addresses = await Address.findAll();
             res.json(addresses);
@@ -11,7 +11,7 @@ export class AddressController {
         }
     }
 
-    async getAddressById(req: Request, res: Response): Promise<void> {
+    static async getAddressById(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const address = await Address.findOne({ where: { id } });
@@ -21,7 +21,7 @@ export class AddressController {
         }
     }
 
-    async createAddress(req: Request, res: Response): Promise<void> {
+    static async createAddress(req: Request, res: Response): Promise<void> {
         try {
             const { street, city, state, zip_code, user_id   } = req.body;
             const address = await Address.create({
@@ -33,7 +33,7 @@ export class AddressController {
         }
     }
 
-    async updateAddress(req: Request, res: Response): Promise<void> {
+    static async updateAddress(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const { street, city, state, zip_code, user_id  } = req.body;
@@ -44,7 +44,7 @@ export class AddressController {
         }
     }
 
-    async deleteAddress(req: Request, res: Response): Promise<void> {
+    static async deleteAddress(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const address = await Address.destroy({ where: { id } });

@@ -23,13 +23,39 @@ export default class ProductController {
     }
 
     static async createProduct(req: any, res: any): Promise<void> {
-        const { name, price } = req.body;
+        // const { brand, model, color, description, price, category_id } = req.body;
+        const products = req.body;
+
+        return
+
         try {
-            const product = await Product.create({ name, price });
-            res.status(201).json(product);
-        } catch (error) {
-            res.status(400).json({ error: 'Erro ao criar o produto '+ error });
+            products.map(async (product: Product) => {
+                await Product.create({ 
+                    brand: product.brand,
+                    model: product.model,
+                    color: product.color,
+                    description: product.description, 
+                    price: product.price,
+                    category_id: product.category_id
+                });
+            })
+
+            res.status(201).json(products.map((product: any) => product));
+        } catch (error){
+            res.status(400).json({ error: 'Erro ao criar os produtos '+ error });
         }
+      
+        // try {
+        //     const product = await Product.create({ 
+        //         name,
+        //         description, 
+        //         price,
+        //         category_id
+        //     });
+        //     res.status(201).json(product);
+        // } catch (error) {
+        //     res.status(400).json({ error: 'Erro ao criar o produto '+ error });
+        // }
     }
     
     static async updateProduct(req: any, res: any): Promise<void> {

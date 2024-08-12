@@ -1,19 +1,27 @@
-import { Table, Column, Model, ForeignKey, BelongsTo, BelongsToMany } from 'sequelize-typescript';
+import { Table, Column, Model, ForeignKey, BelongsTo, BelongsToMany, IsFloat, DataType } from 'sequelize-typescript';
 import { Category } from './Category';
 import { Order } from './Order';
 import { OrderProduct } from './OrderProduct';
 import { ShoppingCart } from './ShoppingCart';
 import { ShoppingCartProduct } from './ShoppingCartProduct';
 
-@Table
+@Table({
+    tableName: 'products',
+})
 export class Product extends Model {
     @Column
-    name!: string;
+    brand!: string;
+
+    @Column
+    model!: string;
+
+    @Column
+    color!: string;
 
     @Column
     description!: string;
 
-    @Column
+    @Column(DataType.FLOAT({ scale: 2 }))
     price!: number;
 
     @ForeignKey(() => Category)

@@ -1,7 +1,9 @@
 import { Table, Column, Model, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { User } from './User';
 
-@Table
+@Table({
+    tableName: 'addresses',
+})
 export class Address extends Model {
     @Column
     street!: string;

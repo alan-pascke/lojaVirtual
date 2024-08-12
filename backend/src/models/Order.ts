@@ -5,7 +5,9 @@ import { Payment } from './Payment';
 import { Product } from './Product';
 import { OrderProduct } from './OrderProduct';
 
-@Table
+@Table({
+    tableName: 'orders',
+})
 export class Order extends Model {
     @ForeignKey(() => User)
     @Column

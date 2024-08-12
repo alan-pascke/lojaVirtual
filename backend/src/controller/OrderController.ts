@@ -3,9 +3,9 @@ import { Order } from '../models/Order';
 import { OrderProduct } from '../models/OrderProduct';
 
 
-export class OrderController { 
+export default class OrderController { 
 
-    async getAllOrders(req: Request, res: Response): Promise<void> {
+    static async getAllOrders(req: Request, res: Response): Promise<void> {
         try {
             const orders = await Order.findAll({
                 include: [OrderProduct]});
@@ -15,7 +15,7 @@ export class OrderController {
         }
     }
 
-    async getOrderById(req: Request, res: Response): Promise<void> {
+    static async getOrderById(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const order = await Order.findOne({ where: { id } });
@@ -25,7 +25,7 @@ export class OrderController {
         }
     }
 
-    async createOrder(req: Request, res: Response): Promise<void> {
+    static async createOrder(req: Request, res: Response): Promise<void> {
         try {
             const { userId, products } = req.body;
             const order = await Order.create({ userId });
@@ -45,7 +45,7 @@ export class OrderController {
         }
     }
 
-    async updateOrder(req: Request, res: Response): Promise<void> {
+    static async updateOrder(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const { user_id } = req.body;
@@ -56,7 +56,7 @@ export class OrderController {
         }
     }
 
-    async deleteOrder(req: Request, res: Response): Promise<void> {
+    static async deleteOrder(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const order = await Order.destroy({ where: { id } });

@@ -5,7 +5,7 @@ import { hash } from "bcrypt";
 
 export default class UserController {
 
-    static async getAllUsers(req: Request, res: Response): Promise<void> {
+    static async getAllUsers(req: Request, res: Response) {
         try {
             const users = await User.findAll();
             res.json(users);
@@ -24,24 +24,28 @@ export default class UserController {
         }
     }
 
-    static async createUser(req: any, res: any): Promise<void> {
+    static async createUser(req: any, res: any) {
+
         const { name, email, password } = req.body;
+    
+        const checkUserExists = await User.findOne({ where: { email: email } });
+
+        if (checkUserExists) {
+            return res.status(400).json({ error: 'Usuário ja existe' });
+        } 
+    
         try {
 
-            const checkUserExists = await User.findOne({ where: { email: email } });
-            if (checkUserExists) {
-                return res.status(400).json({ error: 'Usuário ja existe' });
-            } else {
-                const hashedPassword = await hash(password, 10);
+            const hashedPassword = await hash(password, 10);
 
-                await User.create({
-                    name,
-                    email,
-                    password: hashedPassword
-                })
-                
-                res.status(200).json({ message: 'Usuário criado com sucesso!' });
-            }
+            await User.create({
+                name,
+                email,
+                password: hashedPassword
+            })
+            
+            res.status(200).json({ message: `Usuário "${name}" foi criado com sucesso!` });
+            
         } catch (error) {
             res.status(400).json({ error: 'Erro ao criar usuário '+ error });
         }

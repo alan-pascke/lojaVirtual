@@ -4,7 +4,9 @@ import { User } from './User';
 import { Product } from './Product';
 import { ShoppingCartProduct } from './ShoppingCartProduct';
 
-@Table
+@Table({
+    tableName: 'shopping_carts',
+})
 export class ShoppingCart extends Model {
     @ForeignKey(() => User)
     @Column

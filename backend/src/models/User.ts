@@ -4,7 +4,9 @@ import { Order } from './Order';
 import { ShoppingCart }  from './ShoppingCart';
 import { DataTypes } from 'sequelize';
 
-@Table 
+@Table({
+    tableName: 'users',
+}) 
 export class User extends Model {
     @Column({type: DataTypes.STRING})
     name!: string;

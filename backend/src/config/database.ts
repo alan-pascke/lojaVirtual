@@ -20,13 +20,17 @@ if (!dbUrl) {
   }
 const sequelize = new Sequelize(dbUrl, {
     dialect: 'postgres',
-    models: [User, Address, Category, Product, Order, Payment, ShoppingCart, OrderProduct, ShoppingCartProduct],
+    models: [ User, Address, Category, Product, Order, Payment, ShoppingCart, OrderProduct, ShoppingCartProduct],
+    
   });
+export const initializeDB = async () => {
+    // await Product.sync({ force: true }); 
+    sequelize.authenticate().then(() => {
+      console.log('Connection has been established successfully.');
+  }).catch((error) => {
+      console.error('Unable to connect to the database:', error);
+  });
+}
 
-sequelize.authenticate().then(() => {
-    console.log('Connection has been established successfully.');
-}).catch((error) => {
-    console.error('Unable to connect to the database:', error);
-});
 
 export default sequelize

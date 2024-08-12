@@ -2,7 +2,9 @@
 import { Table, Column, Model, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Order } from './Order';
 
-@Table
+@Table({
+    tableName: 'payments',
+})
 export class Payment extends Model {
     @ForeignKey(() => Order)
     @Column

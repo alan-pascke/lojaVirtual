@@ -5,7 +5,7 @@ import { ShoppingCartProduct } from "../models/ShoppingCartProduct";
 
 export default class ShoppingCartController { 
 
-    async getAllShoppingCarts(req: Request, res: Response): Promise<void> {
+    static async getAllShoppingCarts(req: Request, res: Response): Promise<void> {
         try {
             const shoppingCarts = await ShoppingCart.findAll({
                 include: [ShoppingCartProduct],
@@ -17,7 +17,7 @@ export default class ShoppingCartController {
         }
     }
 
-    async getShoppingCartById(req: Request, res: Response): Promise<void> {
+    static async getShoppingCartById(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const shoppingCart = await ShoppingCart.findByPk(id);
@@ -32,7 +32,7 @@ export default class ShoppingCartController {
         }
     }
 
-    async createShoppingCart(req: Request, res: Response): Promise<void> {
+    static async createShoppingCart(req: Request, res: Response): Promise<void> {
         try {
             const { userId, products } = req.body;
             const shoppingCart = await ShoppingCart.create({ userId });
@@ -53,7 +53,7 @@ export default class ShoppingCartController {
         }
     }
 
-    async updateShoppingCart(req: Request, res: Response): Promise<void> {
+    static async updateShoppingCart(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const { user_id } = req.body;
@@ -71,7 +71,7 @@ export default class ShoppingCartController {
         }
     }
 
-    async deleteShoppingCart(req: Request, res: Response): Promise<void> {
+    static async deleteShoppingCart(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const shoppingCart = await ShoppingCart.findByPk(id);

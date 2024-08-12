@@ -4,7 +4,7 @@ import { Payment } from "../models/Payment";
 
 export default class PaymentController {
     
-    async getAllPayments(req: Request, res: Response): Promise<void> {
+    static async getAllPayments(req: Request, res: Response): Promise<void> {
         try {
             const payments = await Payment.findAll();
             res.json(payments);
@@ -14,7 +14,7 @@ export default class PaymentController {
         }
     }
 
-    async getPaymentById(req: Request, res: Response): Promise<void> {
+    static async getPaymentById(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const payment = await Payment.findByPk(id);
@@ -29,7 +29,7 @@ export default class PaymentController {
         }
     }
 
-    async createPayment(req: Request, res: Response): Promise<void> {
+    static async createPayment(req: Request, res: Response): Promise<void> {
         try {
             const { order_id, amount, payment_date, payment_method } = req.body;
             const payment = await Payment.create({ order_id, amount, payment_date, payment_method });
@@ -40,7 +40,7 @@ export default class PaymentController {
         }
     }
 
-    async updatePayment(req: Request, res: Response): Promise<void> {
+    static async updatePayment(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const { order_id, amount, payment_date, payment_method } = req.body;
@@ -61,7 +61,7 @@ export default class PaymentController {
         }
     }
 
-    async deletePayment(req: Request, res: Response): Promise<void> {
+    static async deletePayment(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const payment = await Payment.findByPk(id);
