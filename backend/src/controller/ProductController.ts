@@ -14,6 +14,7 @@ export default class ProductController {
 
     static async getProductById(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
+
         try {
             const product = await Product.findOne({ where: { id } });
             res.json(product);
@@ -26,7 +27,7 @@ export default class ProductController {
         // const { brand, model, color, description, price, category_id } = req.body;
         const products = req.body;
 
-        return
+     
 
         try {
             products.map(async (product: Product) => {
@@ -35,7 +36,7 @@ export default class ProductController {
                     model: product.model,
                     color: product.color,
                     description: product.description, 
-                    price: product.price,
+                    price: product.price.toFixed(2),
                     category_id: product.category_id
                 });
             })

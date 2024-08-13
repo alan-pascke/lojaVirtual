@@ -21,7 +21,7 @@ export class Product extends Model {
     @Column
     description!: string;
 
-    @Column(DataType.FLOAT({ scale: 2 }))
+    @Column(DataType.DECIMAL(10, 2))
     price!: number;
 
     @ForeignKey(() => Category)

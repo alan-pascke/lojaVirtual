@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+'use client'
 import { Inter } from "next/font/google";
 import "../style/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -6,9 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Music store",
-};
+
 
 export default function RootLayout({
   children,
