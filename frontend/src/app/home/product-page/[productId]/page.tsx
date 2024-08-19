@@ -8,7 +8,7 @@
 
 'use client'
 import { getProduct } from "@/service/product";
-import { Container } from "@mui/material";
+// import { Container } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 
@@ -24,25 +24,45 @@ export default function ProductPage({params} : {params : {productId: number}}) {
         return <div>Loading...</div>
     }
 
+    const addToCart = (id: number) => {
+        
+    }
+
     return(
-        <Container>
-            <div className="mt-28 h-screen grid grid-cols-7 border">
-                <div className="border col-span-3 grid items-center justify-center">
-                    <Image src={''} alt={data.brand}></Image>
-                </div>
-                <div className="grid col-span-4">
-                    <div className="flex flex-col justify-end items-end pe-4 border">
-                        <button className="border h-11 w-48 flex items-center justify-center mb-2">
-                            Comprar    
-                        </button>
-                        <button className="border h-11 w-48 flex items-center justify-center">
-                            Adicionar no Carrinho  
-                        </button>
+        <div className='flex h-[84vh] mt-20 text-gray-600'>
 
-                    </div>
-                </div>
-
+            <div className="flex-none min-w-[300px] w-1/2 border">
+                <Image src={'/'} alt={data.name} width={300} height={300}  />
             </div>
-        </Container>
+
+            <div className="flex 1/2">
+
+                <div className="grid h-full ms-2 p-2 px-8">
+               
+                    <div className="text-xl mt-4">
+                        {data.description}
+                    </div>
+
+                    <div className="text-2xl">
+                        R$ {data.price}
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label>Calcular o frete</label>
+                        <input type="text" placeholder="000000000-00"  className="ring-transparent border-none rounded-sm ps-1 outline-none bg-gray-200"/> 
+                        <div className="mt-2">Valor do frete: R$ 0,00</div>
+                    </div>
+
+                    <div className="flex flex-col justify-center items-center text-white">
+                        <button className="w-full h-11 bg-teal-500 border rounded-md hover:bg-teal-400 transition-all mb-2">Comprar</button>
+                        <button className="w-full h-11 bg-teal-500 border rounded-md hover:bg-teal-400 transition-all">Adicionar ao carrinho</button>
+                    </div>
+
+
+                </div>
+
+               
+            </div>
+        </div>
     )
 };

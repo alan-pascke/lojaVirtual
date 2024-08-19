@@ -1,5 +1,4 @@
 import { Sequelize } from 'sequelize-typescript';
-import dotenv from 'dotenv';
 import { User } from '../models/User';
 import { Address } from '../models/Address';
 import { Category } from '../models/Category';
@@ -9,7 +8,7 @@ import { Payment } from '../models/Payment';
 import { ShoppingCart } from '../models/ShoppingCart';
 import { OrderProduct } from '../models/OrderProduct';
 import { ShoppingCartProduct } from '../models/ShoppingCartProduct';
-dotenv.config();
+require('dotenv').config()
 
 
 const dbUrl = process.env.DATABASE_URL;

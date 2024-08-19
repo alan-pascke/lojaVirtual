@@ -5,9 +5,8 @@ import { initializeDB } from './config/database';
 import categoryRouter from './routes/categories.routes';
 import productRouter from './routes/product.routes';
 
-
 const app = express();
-const port = 5000;
+const port = 5000; 
 
 app.use(cors());
 app.use((req: Request, res: Response, next) => {
