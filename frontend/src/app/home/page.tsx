@@ -4,8 +4,8 @@ import ListProducts from "@/components/ListProducts";
 export default function Home() {
 
   return (
-    <div className="">
-      <div className="container-xl mt-28">
+    <div className="flex justify-center">
+      <div className="mt-28 w-11/12 ">
         <ListProducts/>
       </div>
     </div>

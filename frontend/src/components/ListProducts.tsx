@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 
+
 export default function ListProducts() {
     const { data, isLoading, error, refetch } = useQuery({
         queryKey: ['products'],

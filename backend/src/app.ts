@@ -11,12 +11,12 @@ const port = 5000;
 app.use(cors());
 app.use((req: Request, res: Response, next) => {
     next()
-})
+}) 
 app.use(express.json()); 
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello, World!');
-}); 
+});  
 
 initializeDB()
 
@@ -24,7 +24,7 @@ app.use('/', userRouter);
 app.use('/', categoryRouter);
 app.use('/', productRouter);
 
-
+ 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 })

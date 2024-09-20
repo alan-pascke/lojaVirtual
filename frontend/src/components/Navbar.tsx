@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation";
 export default function Navbar() {
 
     return(
-        <div className="container flex h-10 border items-center">
-            <div className="flex w-full justify-end border">
-                {/* <ShoppingCartIcon className='cursor-pointer'/> */}
+        <div className="flex h-14 border justify-center">
+            <div className="container flex w-full justify-end border">
+
             </div>
         </div>
     )
