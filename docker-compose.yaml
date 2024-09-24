@@ -12,6 +12,8 @@ services:
       - /backend/node_modules
     environment:
       - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    command: yarn start:watch
     networks:
       - lojavirtual-network
 
@@ -22,14 +24,18 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - ./frontend:/app
-      - /frontend/node_modules
+      - ./frontend:/src
+      - /src/node_modules
     environment:
       - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    command: yarn dev
     depends_on:
       - backend
     networks:
       - lojavirtual-network
+
+
 
 networks:
   lojavirtual-network:
