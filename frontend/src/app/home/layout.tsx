@@ -5,7 +5,7 @@ export default function Layout({children}: {children: React.ReactNode}) {
     return (
         <div>
             <Navbar/>
-            <div className="grid justify-center">
+            <div>
                 {children}
             </div>
         </div>

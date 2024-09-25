@@ -1,11 +1,14 @@
+import Banner from "@/components/Banner";
 import ListProducts from "@/components/ListProducts";
 // import { Container } from "@mui/material";
 
 export default function Home() {
 
   return (
-    <div className="flex justify-center">
-      <div className="mt-28 w-11/12 ">
+    <div>
+      <Banner/>
+
+      <div className="flex justify-center mt-14 ">
         <ListProducts/>
       </div>
     </div>
