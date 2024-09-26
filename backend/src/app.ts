@@ -4,11 +4,12 @@ import userRouter from './routes/user.routes';
 import { initializeDB } from './config/database';
 import categoryRouter from './routes/categories.routes';
 import productRouter from './routes/product.routes';
+import paymentRouter from './routes/payment.routes';
 
 const app = express();
 const port = 5000; 
 
-app.use(cors());
+app.use(cors()); 
 app.use((req: Request, res: Response, next) => {
     next()
 }) 
@@ -19,10 +20,11 @@ app.get('/', (req: Request, res: Response) => {
 });  
 
 initializeDB()
-
+ 
 app.use('/', userRouter);
 app.use('/', categoryRouter);
 app.use('/', productRouter);
+app.use('/', paymentRouter);
 
  
 app.listen(port, () => {
