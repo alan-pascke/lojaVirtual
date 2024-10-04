@@ -8,7 +8,7 @@
 
 'use client'
 import { getProduct } from "@/service/product";
-// import { Container } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 
@@ -19,6 +19,8 @@ export default function ProductPage({params} : {params : {productId: number}}) {
         queryFn:() => getProduct(params.productId), 
         }
     );
+
+    const router = useRouter()
     
     if (!data) {
         return <div>Loading...</div>
@@ -26,6 +28,10 @@ export default function ProductPage({params} : {params : {productId: number}}) {
 
     const addToCart = (id: number) => {
         
+    }
+
+    const buyProduct = (id: number) => {
+        router.push(`/payment-page/${id}` );
     }
 
     return(
@@ -54,7 +60,11 @@ export default function ProductPage({params} : {params : {productId: number}}) {
                     </div>
 
                     <div className="flex flex-col justify-center items-center text-white">
-                        <button className="w-full h-11 bg-teal-500 border rounded-md hover:bg-teal-400 transition-all mb-2">Comprar</button>
+                        <button 
+                            className="w-full h-11 bg-teal-500 border rounded-md hover:bg-teal-400 transition-all mb-2"
+                            onClick={() => buyProduct(data.id)}    
+                            >Comprar
+                        </button>
                         <button className="w-full h-11 bg-teal-500 border rounded-md hover:bg-teal-400 transition-all">Adicionar ao carrinho</button>
                     </div>
 

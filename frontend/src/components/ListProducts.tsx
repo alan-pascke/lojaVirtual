@@ -27,37 +27,9 @@ export default function ListProducts() {
             </div>
         )
     }
+
+
     
-    // return(
-    //     <Carousel className="flex">
-    //         <CarouselContent>
-    //             {data.map((product: ProductType, index: number) => {
-    //                 return (
-    //                     <CarouselItem key={index} className="sm:basis-1/3 md:basis-1/4 xl:basis-1/5"> 
-    //                         <Card onClick={()=> handleClick(product.id)} className="flex items-center w-64 h-72">
-    //                             <CardContent className="flex flex-col justify-center">                            
-    //                                 <div className="h-36 border flex justify-center items-center">
-    //                                     imagem
-    //                                 </div>
-
-    //                                 <div className=" p-2">
-    //                                     {product.description}
-    //                                 </div>
-
-    //                                 <div className="flex justify-end">
-    //                                     R$ {product.price}
-    //                                 </div>
-    //                             </CardContent>
-    //                         </Card>
-
-    //                     </CarouselItem>
-    //                 )
-    //             })}
-    //         </CarouselContent>
-    //         <CarouselPrevious />
-    //         <CarouselNext />
-    //     </Carousel>
-    // )
     return (
         <div className="p-10 w-full flex justify-center sm:m-2 border">
             <Carousel opts={{ align: 'start', loop: true}} className="w-sreen lg:max-w-6xl max-w-sm md:max-w-3xl ">
@@ -65,7 +37,7 @@ export default function ListProducts() {
                     {data.map((product: ProductType, index: number) => (
                     <CarouselItem key={index} className="pl-2 sm:basis-1/2  lg:basis-1/4">
                    
-                        <Card onClick={()=> handleClick(index)} className="w-64 h-[450px]" >
+                        <Card onClick={()=> handleClick(index + 1)} className="w-64 h-[450px] cursor-pointer" >
                             <CardHeader>
                                 <div className="h-[300px] border-b flex justify-center items-center">
                                     imagem

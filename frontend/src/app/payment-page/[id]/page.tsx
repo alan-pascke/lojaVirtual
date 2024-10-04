@@ -1,17 +1,27 @@
 'use client'
 import musicStoreAPI from '@/api/musicStoreAPI';
+import { getProduct } from '@/service/product';
 import {initMercadoPago, StatusScreen} from '@mercadopago/sdk-react'
 import {Payment} from '@mercadopago/sdk-react'
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 initMercadoPago('TEST-960ae8e5-6dab-4d6e-a433-a6d9ceb1bcd3')
 
 
 
-export default function PaymentPage() {
+export default function PaymentPage({params} : {params : {id: number}}) {
 
   const [paymentId, setPaymentId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
+
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['product'],
+    queryFn:() => getProduct(params.id), 
+    }
+  );
+  
+
   
 
   const initialization = {

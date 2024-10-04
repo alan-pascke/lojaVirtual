@@ -7,3 +7,17 @@
   }
 }
 
+.scrollbar::-webkit-scrollbar {
+        width: .5em;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+        background-color: #cecece;
+        border-radius: 0 10px 10px 0
+        
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+        background-color: #1a1a1a;
+        border-radius: 10px
+}

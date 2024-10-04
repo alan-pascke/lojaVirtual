@@ -17,6 +17,9 @@ export class User extends Model {
     @Column({type: DataTypes.STRING})
     password!: string;
 
+    @Column({type: DataTypes.STRING})
+    cpf!:string   
+
     @HasMany(() => Address)
     addresses!: Address[];
 
