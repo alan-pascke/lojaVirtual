@@ -2,11 +2,10 @@
 import { Inter } from "next/font/google";
 import "../style/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
+import { AuthProvider } from "@/context/AuthContext";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
-
-
 
 export default function RootLayout({
   children,
@@ -16,11 +15,14 @@ export default function RootLayout({
 
   const queryClient = new QueryClient()
 
+
   return (
     <html lang="pt-br">
-      <QueryClientProvider client={queryClient}>
-        <body className={inter.className}>{children}</body>
-      </QueryClientProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <body className={inter.className}>{children}</body>
+        </QueryClientProvider>
+      </AuthProvider>
     </html>
   );
 }

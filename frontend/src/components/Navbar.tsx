@@ -1,7 +1,5 @@
 'use client'
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 import Link from "next/link";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "./ui/dropdown-menu";
@@ -11,21 +9,19 @@ import { Button } from "./ui/button";
 import Login from "./Login";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import Register from "./Register";
-
+import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
 
+    const { isAuthenticated } = useAuth();
 
-    const [userIslogged, setUserIsLogged] = useState(false);
     const items = Array.from({length: 10}, (_, i) => i + 1);
 
     return(
         <div className="flex h-16 border justify-center">
             <div className="container grid grid-cols-2 items-center w-full px-3">
-                <Link href={'/home'} className="">
-                    Home   
-                </Link>
-                {!userIslogged ? (
+                <Link href={'/home'} className=""> Home </Link>
+                {!isAuthenticated ? (
                     <div className="flex justify-end">
                         <DropdownMenu>
                             <DropdownMenuTrigger>
@@ -39,20 +35,7 @@ export default function Navbar() {
                             </DropdownMenuTrigger>
 
                             <DropdownMenuContent className="flex flex-col w-56 p-2 gap-2">
-                                <Dialog>
-                                    <DialogTrigger asChild>
-                                        <Button className="w-full">Entrar</Button>
-                                    </DialogTrigger>
-
-                                    <DialogContent className="sm:max-w-[425px]">
-                                        <DialogHeader className="mb-7 flex justify-self-center">
-                                            <DialogTitle>
-                                                Entrar
-                                            </DialogTitle>
-                                        </DialogHeader>
-                                        <Login/>
-                                    </DialogContent>
-                                </Dialog>
+                                <Login/>
 
                                 <Dialog>
                                     <DialogTrigger asChild>
