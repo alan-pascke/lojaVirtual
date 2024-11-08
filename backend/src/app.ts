@@ -11,10 +11,22 @@ import authRouter from './routes/auth.routes';
 const app = express();
 const port = 5000; 
  
-const corsOptions = {
-    origin: 'https://themusicstore.onrender.com',
+const allowedOrigins = [
+    'https://themusicstore.vercel.app/',
+    'http://localhost:3000', 
+];
+
+const corsOptions: cors.CorsOptions = {
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
-}
+};
 
 app.use(cors(corsOptions)); 
 app.use((req: Request, res: Response, next) => {
