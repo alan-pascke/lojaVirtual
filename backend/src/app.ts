@@ -12,7 +12,7 @@ const app = express();
 const port = 5000; 
  
 const corsOptions = {
-    origin: 'https://themusicstore.vercel.app/',
+    origin: 'https://themusicstore.onrender.com',
     credentials: true,
 }
 
